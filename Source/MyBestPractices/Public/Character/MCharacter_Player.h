@@ -21,10 +21,9 @@ public:
 	
 	
 private: // Property
-	UPROPERTY()
+	UPROPERTY(VisibleDefaultsOnly)
 	TObjectPtr<USpringArmComponent> SpringArmComponent; // Camera boom
 	
-	UPROPERTY()
+	UPROPERTY(VisibleDefaultsOnly)
 	TObjectPtr<UCameraComponent> CameraComponent;
-	
 };
