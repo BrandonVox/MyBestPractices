@@ -71,6 +71,7 @@ void AMCharacter_Player::SetupPlayerInputComponent(class UInputComponent* Player
 void AMCharacter_Player::HandleIA_Jump_Triggered()
 {
 	UE_LOG(LogTemp, Warning, TEXT("HandleIA_Jump_Triggered"));
+	Jump();
 }
 
 
