@@ -6,6 +6,7 @@
 #include "Character/MCharacter.h"
 #include "MCharacter_Player.generated.h"
 
+struct FInputActionValue;
 class UInputAction;
 class UInputMappingContext;
 class UCameraComponent;
@@ -27,6 +28,7 @@ public: // Function
 private: // Function
 	void SetupInputMappingContext();
 	void HandleIA_Jump_Triggered();
+	void HandleIA_Look_Triggered(const FInputActionValue& InputActionValue);
 
 private: // Property
 	UPROPERTY(VisibleDefaultsOnly)
@@ -40,4 +42,7 @@ private: // Property
 
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings | Input")
 	TObjectPtr<UInputAction> IA_Jump;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings | Input")
+	TObjectPtr<UInputAction> IA_Look;
 };

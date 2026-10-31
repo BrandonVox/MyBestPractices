@@ -44,7 +44,7 @@ void AMCharacter_Player::SetupInputMappingContext()
 
 	UEnhancedInputLocalPlayerSubsystem* EnhancedInputSubsystem =
 		ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(MyLocalPlayer);
-	
+
 	check(EnhancedInputSubsystem);
 
 	if (!EnhancedInputSubsystem->HasMappingContext(IMC_BasicMovement))
@@ -57,7 +57,7 @@ void AMCharacter_Player::SetupPlayerInputComponent(class UInputComponent* Player
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
-	
+
 	EnhancedInputComponent->BindAction
 	(
 		IA_Jump,
@@ -65,7 +65,14 @@ void AMCharacter_Player::SetupPlayerInputComponent(class UInputComponent* Player
 		this,
 		&AMCharacter_Player::HandleIA_Jump_Triggered
 	);
-	
+
+	EnhancedInputComponent->BindAction
+	(
+		IA_Look,
+		ETriggerEvent::Triggered,
+		this,
+		&AMCharacter_Player::HandleIA_Look_Triggered
+	);
 }
 
 void AMCharacter_Player::HandleIA_Jump_Triggered()
@@ -74,6 +81,10 @@ void AMCharacter_Player::HandleIA_Jump_Triggered()
 	Jump();
 }
 
-
-
-
+void AMCharacter_Player::HandleIA_Look_Triggered(const FInputActionValue& InputActionValue)
+{
+	// X Y
+	FVector2D AxisValue = InputActionValue.Get<FVector2D>();
+	
+	UE_LOG(LogTemp, Warning, TEXT("Look X = %f, Y = %f"), AxisValue.X, AxisValue.Y);
+}
