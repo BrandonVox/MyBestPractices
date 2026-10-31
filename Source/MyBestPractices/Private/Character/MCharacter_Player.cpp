@@ -3,6 +3,7 @@
 
 #include "Character/MCharacter_Player.h"
 
+#include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -51,3 +52,27 @@ void AMCharacter_Player::SetupInputMappingContext()
 		EnhancedInputSubsystem->AddMappingContext(IMC_BasicMovement, 0);
 	}
 }
+
+void AMCharacter_Player::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent);
+	
+	EnhancedInputComponent->BindAction
+	(
+		IA_Jump,
+		ETriggerEvent::Triggered,
+		this,
+		&AMCharacter_Player::HandleIA_Jump_Triggered
+	);
+	
+}
+
+void AMCharacter_Player::HandleIA_Jump_Triggered()
+{
+	UE_LOG(LogTemp, Warning, TEXT("HandleIA_Jump_Triggered"));
+}
+
+
+
+
