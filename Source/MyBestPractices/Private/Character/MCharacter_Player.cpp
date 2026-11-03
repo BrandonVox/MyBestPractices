@@ -23,7 +23,7 @@ AMCharacter_Player::AMCharacter_Player()
 	// make the camera follow the controller's rotation
 	SpringArmComponent->bUsePawnControlRotation = true;
 	CameraComponent->bUsePawnControlRotation = false;
-	
+
 	// controller rotation has 3 values: yaw pitch roll
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationPitch = false;
@@ -113,4 +113,14 @@ void AMCharacter_Player::HandleIA_Move_Triggered(const FInputActionValue& InputA
 	FVector2D AxisValue = InputActionValue.Get<FVector2D>();
 
 	UE_LOG(LogTemp, Warning, TEXT("Move X = %f, Y = %f"), AxisValue.X, AxisValue.Y);
+	// Axis.X DA Right Left
+	// Axis.Y WS Forward Backward
+
+	// Movement Component
+	// Movement Input
+	// Direction ScaleValue
+	// Forward Direction  of character
+	// Right Direction of character
+	AddMovementInput(GetActorForwardVector(), AxisValue.Y);
+	AddMovementInput(GetActorRightVector(), AxisValue.X);
 }
