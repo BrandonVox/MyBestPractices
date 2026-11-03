@@ -81,7 +81,7 @@ void AMCharacter_Player::SetupPlayerInputComponent(class UInputComponent* Player
 
 void AMCharacter_Player::HandleIA_Jump_Triggered()
 {
-	UE_LOG(LogTemp, Warning, TEXT("HandleIA_Jump_Triggered"));
+	// UE_LOG(LogTemp, Warning, TEXT("HandleIA_Jump_Triggered"));
 	Jump();
 }
 
@@ -90,7 +90,7 @@ void AMCharacter_Player::HandleIA_Look_Triggered(const FInputActionValue& InputA
 	// X Y
 	FVector2D AxisValue = InputActionValue.Get<FVector2D>();
 	
-	UE_LOG(LogTemp, Warning, TEXT("Look X = %f, Y = %f"), AxisValue.X, AxisValue.Y);
+	// UE_LOG(LogTemp, Warning, TEXT("Look X = %f, Y = %f"), AxisValue.X, AxisValue.Y);
 	AddControllerYawInput(AxisValue.X); // looking left right Axis.X
 	AddControllerPitchInput(AxisValue.Y); // looking up down Axis.y
 }
