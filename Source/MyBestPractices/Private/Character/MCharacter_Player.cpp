@@ -23,6 +23,11 @@ AMCharacter_Player::AMCharacter_Player()
 	// make the camera follow the controller's rotation
 	SpringArmComponent->bUsePawnControlRotation = true;
 	CameraComponent->bUsePawnControlRotation = false;
+	
+	// controller rotation has 3 values: yaw pitch roll
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationRoll = false;
 }
 
 void AMCharacter_Player::PawnClientRestart()
