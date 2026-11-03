@@ -29,6 +29,7 @@ private: // Function
 	void SetupInputMappingContext();
 	void HandleIA_Jump_Triggered();
 	void HandleIA_Look_Triggered(const FInputActionValue& InputActionValue);
+	void HandleIA_Move_Triggered(const FInputActionValue& InputActionValue);
 
 private: // Property
 	UPROPERTY(VisibleDefaultsOnly)
@@ -45,4 +46,7 @@ private: // Property
 	
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings | Input")
 	TObjectPtr<UInputAction> IA_Look;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings | Input")
+	TObjectPtr<UInputAction> IA_Move;
 };

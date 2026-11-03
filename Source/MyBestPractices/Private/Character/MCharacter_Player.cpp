@@ -19,7 +19,7 @@ AMCharacter_Player::AMCharacter_Player()
 	// attach the camera boom is the root component
 	CameraComponent->SetupAttachment(SpringArmComponent, USpringArmComponent::SocketName);
 	SpringArmComponent->SetupAttachment(GetRootComponent());
-	
+
 	// make the camera follow the controller's rotation
 	SpringArmComponent->bUsePawnControlRotation = true;
 	CameraComponent->bUsePawnControlRotation = false;
@@ -77,6 +77,14 @@ void AMCharacter_Player::SetupPlayerInputComponent(class UInputComponent* Player
 		this,
 		&AMCharacter_Player::HandleIA_Look_Triggered
 	);
+
+	EnhancedInputComponent->BindAction
+	(
+		IA_Move,
+		ETriggerEvent::Triggered,
+		this,
+		&AMCharacter_Player::HandleIA_Move_Triggered
+	);
 }
 
 void AMCharacter_Player::HandleIA_Jump_Triggered()
@@ -89,8 +97,15 @@ void AMCharacter_Player::HandleIA_Look_Triggered(const FInputActionValue& InputA
 {
 	// X Y
 	FVector2D AxisValue = InputActionValue.Get<FVector2D>();
-	
+
 	// UE_LOG(LogTemp, Warning, TEXT("Look X = %f, Y = %f"), AxisValue.X, AxisValue.Y);
 	AddControllerYawInput(AxisValue.X); // looking left right Axis.X
 	AddControllerPitchInput(AxisValue.Y); // looking up down Axis.y
+}
+
+void AMCharacter_Player::HandleIA_Move_Triggered(const FInputActionValue& InputActionValue)
+{
+	FVector2D AxisValue = InputActionValue.Get<FVector2D>();
+
+	UE_LOG(LogTemp, Warning, TEXT("Move X = %f, Y = %f"), AxisValue.X, AxisValue.Y);
 }
