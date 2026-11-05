@@ -116,9 +116,10 @@ void AMCharacter_Player::HandleIA_Move_Triggered(const FInputActionValue& InputA
 
 
 	// Unit vector for directional
-	FVector Camera_Direction_Forward = CameraComponent->GetForwardVector().GetSafeNormal();
 	FVector Camera_Direction_Right = CameraComponent->GetRightVector().GetSafeNormal();
+	FVector Movement_Direction_Forward = 
+		FVector::CrossProduct(Camera_Direction_Right, FVector::UpVector).GetSafeNormal();
 	
-	AddMovementInput(Camera_Direction_Forward, AxisValue.Y);
+	AddMovementInput(Movement_Direction_Forward, AxisValue.Y);
 	AddMovementInput(Camera_Direction_Right, AxisValue.X);
 }
