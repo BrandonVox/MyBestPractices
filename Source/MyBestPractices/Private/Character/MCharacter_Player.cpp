@@ -113,14 +113,12 @@ void AMCharacter_Player::HandleIA_Move_Triggered(const FInputActionValue& InputA
 	FVector2D AxisValue = InputActionValue.Get<FVector2D>().GetClampedToMaxSize(1.f);
 
 	UE_LOG(LogTemp, Warning, TEXT("Moment Input Length = %f"), AxisValue.Length());
-	// Axis.X DA Right Left
-	// Axis.Y WS Forward Backward
 
-	// Movement Component
-	// Movement Input
-	// Direction ScaleValue
-	// Forward Direction  of character
-	// Right Direction of character
-	AddMovementInput(GetActorForwardVector(), AxisValue.Y);
-	AddMovementInput(GetActorRightVector(), AxisValue.X);
+
+	// Unit vector for directional
+	FVector Camera_Direction_Forward = CameraComponent->GetForwardVector().GetSafeNormal();
+	FVector Camera_Direction_Right = CameraComponent->GetRightVector().GetSafeNormal();
+	
+	AddMovementInput(Camera_Direction_Forward, AxisValue.Y);
+	AddMovementInput(Camera_Direction_Right, AxisValue.X);
 }
