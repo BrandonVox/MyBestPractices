@@ -110,9 +110,9 @@ void AMCharacter_Player::HandleIA_Look_Triggered(const FInputActionValue& InputA
 
 void AMCharacter_Player::HandleIA_Move_Triggered(const FInputActionValue& InputActionValue)
 {
-	FVector2D AxisValue = InputActionValue.Get<FVector2D>();
+	FVector2D AxisValue = InputActionValue.Get<FVector2D>().GetClampedToMaxSize(1.f);
 
-	UE_LOG(LogTemp, Warning, TEXT("Move X = %f, Y = %f"), AxisValue.X, AxisValue.Y);
+	UE_LOG(LogTemp, Warning, TEXT("Moment Input Length = %f"), AxisValue.Length());
 	// Axis.X DA Right Left
 	// Axis.Y WS Forward Backward
 
