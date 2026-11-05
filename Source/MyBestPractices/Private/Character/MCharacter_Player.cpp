@@ -6,6 +6,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Camera/CameraComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
 AMCharacter_Player::AMCharacter_Player()
@@ -28,6 +29,8 @@ AMCharacter_Player::AMCharacter_Player()
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
+	
+	GetCharacterMovement()->bOrientRotationToMovement = true;
 }
 
 void AMCharacter_Player::PawnClientRestart()
