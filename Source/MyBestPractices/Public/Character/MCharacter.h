@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "MCharacter.generated.h"
 
+class UMComponent_Attack;
+
 UCLASS()
 class MYBESTPRACTICES_API AMCharacter : public ACharacter
 {
@@ -25,5 +27,8 @@ protected:
 
 	// Called to bind functionality to input
 	// virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
+private: // Property
+	UPROPERTY(VisibleDefaultsOnly)
+	TObjectPtr<UMComponent_Attack> Component_Attack;
 };
