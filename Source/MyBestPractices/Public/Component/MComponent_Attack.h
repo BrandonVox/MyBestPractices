@@ -15,6 +15,7 @@ class MYBESTPRACTICES_API UMComponent_Attack : public UActorComponent
 public:	// Function
 	// Sets default values for this component's properties
 	UMComponent_Attack();
+	void LocalInputPressed();
 	
 	// Called every frame
 	// virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

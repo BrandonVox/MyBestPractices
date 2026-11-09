@@ -13,7 +13,6 @@ UMComponent_Attack::UMComponent_Attack()
 	// ...
 }
 
-
 // Called when the game starts
 void UMComponent_Attack::BeginPlay()
 {
@@ -32,3 +31,7 @@ void UMComponent_Attack::BeginPlay()
 // 	// ...
 // }
 
+void UMComponent_Attack::LocalInputPressed()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Attack Pressed"));
+}

@@ -6,6 +6,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Camera/CameraComponent.h"
+#include "Component/MComponent_Attack.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
@@ -29,7 +30,7 @@ AMCharacter_Player::AMCharacter_Player()
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
-	
+
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 }
 
@@ -63,6 +64,11 @@ void AMCharacter_Player::SetupInputMappingContext()
 	{
 		EnhancedInputSubsystem->AddMappingContext(IMC_BasicMovement, 0);
 	}
+
+	if (!EnhancedInputSubsystem->HasMappingContext(IMC_Combat))
+	{
+		EnhancedInputSubsystem->AddMappingContext(IMC_Combat, 0);
+	}
 }
 
 void AMCharacter_Player::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -93,6 +99,14 @@ void AMCharacter_Player::SetupPlayerInputComponent(class UInputComponent* Player
 		this,
 		&AMCharacter_Player::HandleIA_Move_Triggered
 	);
+
+	EnhancedInputComponent->BindAction
+	(
+		IA_Attack,
+		ETriggerEvent::Triggered,
+		this,
+		&AMCharacter_Player::HandleIA_Attack_Triggered
+	);
 }
 
 void AMCharacter_Player::HandleIA_Jump_Triggered()
@@ -120,9 +134,18 @@ void AMCharacter_Player::HandleIA_Move_Triggered(const FInputActionValue& InputA
 
 	// Unit vector for directional
 	FVector Camera_Direction_Right = CameraComponent->GetRightVector().GetSafeNormal();
-	FVector Movement_Direction_Forward = 
+	FVector Movement_Direction_Forward =
 		FVector::CrossProduct(Camera_Direction_Right, FVector::UpVector).GetSafeNormal();
-	
+
 	AddMovementInput(Movement_Direction_Forward, AxisValue.Y);
 	AddMovementInput(Camera_Direction_Right, AxisValue.X);
+}
+
+void AMCharacter_Player::HandleIA_Attack_Triggered(const FInputActionValue& InputActionValue)
+{
+	// Component_Attack -> LocalInputPressed
+	if (Component_Attack != nullptr)
+	{
+		Component_Attack->LocalInputPressed();
+	}
 }

@@ -30,6 +30,7 @@ private: // Function
 	void HandleIA_Jump_Triggered();
 	void HandleIA_Look_Triggered(const FInputActionValue& InputActionValue);
 	void HandleIA_Move_Triggered(const FInputActionValue& InputActionValue);
+	void HandleIA_Attack_Triggered(const FInputActionValue& InputActionValue);
 
 private: // Property
 	UPROPERTY(VisibleDefaultsOnly)
@@ -40,6 +41,9 @@ private: // Property
 
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings | Input")
 	TObjectPtr<UInputMappingContext> IMC_BasicMovement;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings | Input")
+	TObjectPtr<UInputMappingContext> IMC_Combat;
 
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings | Input")
 	TObjectPtr<UInputAction> IA_Jump;
@@ -49,4 +53,7 @@ private: // Property
 	
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings | Input")
 	TObjectPtr<UInputAction> IA_Move;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings | Input")
+	TObjectPtr<UInputAction> IA_Attack;
 };
