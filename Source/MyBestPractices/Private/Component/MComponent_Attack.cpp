@@ -34,4 +34,11 @@ void UMComponent_Attack::BeginPlay()
 void UMComponent_Attack::LocalInputPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Attack Pressed"));
+	
+	USkeletalMeshComponent* Comp_Mesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
+	if (Comp_Mesh != nullptr)
+	{
+		UAnimInstance* AnimInstance_My = Comp_Mesh->GetAnimInstance();
+		AnimInstance_My->Montage_Play(Montage_Attack);
+	}
 }
