@@ -34,6 +34,11 @@ void UMComponent_Attack::LocalInputPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Attack Pressed"));
 
+	TryAttack();
+}
+
+void UMComponent_Attack::TryAttack()
+{
 	if (!bIsAttacking)
 	{
 		Set_bIsAttacking(true);

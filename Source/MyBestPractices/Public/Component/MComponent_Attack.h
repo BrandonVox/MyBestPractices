@@ -24,8 +24,9 @@ public: // Function
 protected: // Function
 	// Called when the game starts
 	virtual void BeginPlay() override;
-	
+
 private: // Function
+	void TryAttack();
 	void PlayMontage_Attack();
 	void Set_bIsAttacking(bool bNewValue);
 	void OnSet_bIsAttacking();
