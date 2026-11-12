@@ -27,6 +27,8 @@ protected: // Function
 	
 private: // Function
 	void PlayMontage_Attack();
+	void Set_bIsAttacking(bool bNewValue);
+	void OnSet_bIsAttacking();
 
 private: // Property
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings")

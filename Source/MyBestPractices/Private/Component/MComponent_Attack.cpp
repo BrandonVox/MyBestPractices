@@ -36,8 +36,7 @@ void UMComponent_Attack::LocalInputPressed()
 
 	if (!bIsAttacking)
 	{
-		PlayMontage_Attack();
-		bIsAttacking = true;
+		Set_bIsAttacking(true);
 	}
 }
 
@@ -51,8 +50,25 @@ void UMComponent_Attack::PlayMontage_Attack()
 	}
 }
 
-
 void UMComponent_Attack::EndAttack()
 {
-	bIsAttacking = false;
+	Set_bIsAttacking(false);
+}
+
+void UMComponent_Attack::Set_bIsAttacking(bool bNewValue)
+{
+	bIsAttacking = bNewValue;
+	OnSet_bIsAttacking();
+}
+
+void UMComponent_Attack::OnSet_bIsAttacking()
+{
+	if (bIsAttacking)
+	{
+		PlayMontage_Attack();
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("bIsAttacking = false"));
+	}
 }
