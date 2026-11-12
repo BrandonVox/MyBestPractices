@@ -20,3 +20,8 @@ void UMAnimNotify_EndAttack::Notify(USkeletalMeshComponent* MeshComp, UAnimSeque
 		Component_Attack->EndAttack();
 	}
 }
+
+FString UMAnimNotify_EndAttack::GetNotifyName_Implementation() const
+{
+	return FString(TEXT("EndAttack"));
+}
