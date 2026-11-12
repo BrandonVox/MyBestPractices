@@ -19,7 +19,6 @@ void UMComponent_Attack::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	
 }
 
 
@@ -34,7 +33,16 @@ void UMComponent_Attack::BeginPlay()
 void UMComponent_Attack::LocalInputPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Attack Pressed"));
-	
+
+	if (!bIsAttacking)
+	{
+		PlayMontage_Attack();
+		bIsAttacking = true;
+	}
+}
+
+void UMComponent_Attack::PlayMontage_Attack()
+{
 	USkeletalMeshComponent* Comp_Mesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
 	if (Comp_Mesh != nullptr)
 	{

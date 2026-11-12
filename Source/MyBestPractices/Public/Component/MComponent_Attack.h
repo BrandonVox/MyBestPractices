@@ -20,12 +20,16 @@ public: // Function
 	// Called every frame
 	// virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-protected:
+protected: // Function
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	
+private: // Function
+	void PlayMontage_Attack();
 
 private: // Property
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings")
 	TObjectPtr<UAnimMontage> Montage_Attack;
 	
+	bool bIsAttacking = false;
 };
