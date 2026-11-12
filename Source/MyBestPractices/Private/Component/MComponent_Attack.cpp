@@ -50,3 +50,9 @@ void UMComponent_Attack::PlayMontage_Attack()
 		AnimInstance_My->Montage_Play(Montage_Attack);
 	}
 }
+
+
+void UMComponent_Attack::EndAttack()
+{
+	bIsAttacking = false;
+}

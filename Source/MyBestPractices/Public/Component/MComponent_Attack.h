@@ -16,6 +16,7 @@ public: // Function
 	// Sets default values for this component's properties
 	UMComponent_Attack();
 	void LocalInputPressed();
+	void EndAttack();
 
 	// Called every frame
 	// virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
