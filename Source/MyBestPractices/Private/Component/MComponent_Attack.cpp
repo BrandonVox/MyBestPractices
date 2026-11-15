@@ -37,7 +37,7 @@ void UMComponent_Attack::LocalInputPressed()
 
 	if (GetOwner()->HasAuthority()) // server
 	{
-		TryAttack();
+		NetMulticast_TryAttack();
 	}
 	else // Not Server - Clients
 	{
@@ -56,6 +56,13 @@ void UMComponent_Attack::TryAttack()
 void UMComponent_Attack::Server_TryAttack_Implementation()
 {
 	// Server
+	NetMulticast_TryAttack();
+}
+
+void UMComponent_Attack::NetMulticast_TryAttack_Implementation()
+{
+	// all machines
+	// server and clients
 	TryAttack();
 }
 

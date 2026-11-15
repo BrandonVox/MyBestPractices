@@ -31,6 +31,9 @@ private: // Function
 	UFUNCTION(Server, Reliable)
 	void Server_TryAttack();
 	
+	UFUNCTION(NetMulticast, Reliable)
+	void NetMulticast_TryAttack();
+	
 	void PlayMontage_Attack();
 	void Set_bIsAttacking(bool bNewValue);
 	void OnSet_bIsAttacking();
