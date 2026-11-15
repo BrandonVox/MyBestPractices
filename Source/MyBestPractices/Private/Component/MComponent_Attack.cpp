@@ -34,10 +34,15 @@ void UMComponent_Attack::LocalInputPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Attack Pressed"));
 
-	Server_TryAttack();
-	// RPC remote procedure calls
-	// client
-	// 
+	
+	if (GetOwner()->HasAuthority()) // server
+	{
+		TryAttack();
+	}
+	else // Not Server - Clients
+	{
+		Server_TryAttack();
+	}
 }
 
 void UMComponent_Attack::TryAttack()
