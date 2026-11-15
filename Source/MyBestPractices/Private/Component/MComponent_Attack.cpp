@@ -34,7 +34,10 @@ void UMComponent_Attack::LocalInputPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Attack Pressed"));
 
-	TryAttack();
+	Server_TryAttack();
+	// RPC remote procedure calls
+	// client
+	// 
 }
 
 void UMComponent_Attack::TryAttack()
@@ -43,6 +46,12 @@ void UMComponent_Attack::TryAttack()
 	{
 		Set_bIsAttacking(true);
 	}
+}
+
+void UMComponent_Attack::Server_TryAttack_Implementation()
+{
+	// Server
+	TryAttack();
 }
 
 void UMComponent_Attack::PlayMontage_Attack()

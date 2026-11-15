@@ -27,6 +27,10 @@ protected: // Function
 
 private: // Function
 	void TryAttack();
+	
+	UFUNCTION(Server, Reliable)
+	void Server_TryAttack();
+	
 	void PlayMontage_Attack();
 	void Set_bIsAttacking(bool bNewValue);
 	void OnSet_bIsAttacking();
