@@ -43,17 +43,6 @@ void UMComponent_Attack::LocalInputPressed()
 	{
 		Server_TryAttack();
 	}
-
-	/*
-	 *		Local Role
-	 *		Local Role tells us the network role of an Actor on the local machine.
-	 *		The same Actor can have a different role on each machine.
-	 *		On the server, the Actor has the role Authority.
-	 *		On the client, the Actor has the role Proxy.
-	 *		On the client that controls this Actor, it has the role Autonomous Proxy.
-	 *		On the other clients, it has the role Simulated Proxy.
-	 *		We use the function GetLocalRole to check.
-	 */
 }
 
 void UMComponent_Attack::TryAttack()
