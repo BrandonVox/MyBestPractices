@@ -32,7 +32,7 @@ private: // Function
 	void Server_TryAttack();
 	
 	UFUNCTION(NetMulticast, Reliable)
-	void NetMulticast_TryAttack();
+	void NetMulticast_PlayAttack();
 	
 	void PlayMontage_Attack();
 	void Set_bIsAttacking(bool bNewValue);

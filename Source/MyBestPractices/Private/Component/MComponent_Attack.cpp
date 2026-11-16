@@ -37,7 +37,10 @@ void UMComponent_Attack::LocalInputPressed()
 
 	if (GetOwner()->HasAuthority()) // server
 	{
-		NetMulticast_TryAttack();
+		if (!bIsAttacking)
+		{
+			NetMulticast_PlayAttack();
+		}
 	}
 	else // Not Server - Clients
 	{
@@ -56,14 +59,18 @@ void UMComponent_Attack::TryAttack()
 void UMComponent_Attack::Server_TryAttack_Implementation()
 {
 	// Server
-	NetMulticast_TryAttack();
+	if (!bIsAttacking)
+	{
+		NetMulticast_PlayAttack();
+	}
 }
 
-void UMComponent_Attack::NetMulticast_TryAttack_Implementation()
+void UMComponent_Attack::NetMulticast_PlayAttack_Implementation()
 {
+	UE_LOG(LogTemp, Warning, TEXT("NetMulticast_PlayAttack"));
 	// all machines
 	// server and clients
-	TryAttack();
+	Set_bIsAttacking(true);
 }
 
 void UMComponent_Attack::PlayMontage_Attack()
