@@ -10,6 +10,8 @@ AMCharacter::AMCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+	bReplicates = true;
+	SetNetUpdateFrequency(100.f);
 	
 	Component_Attack = CreateDefaultSubobject<UMComponent_Attack>(TEXT("Component_Attack"));
 

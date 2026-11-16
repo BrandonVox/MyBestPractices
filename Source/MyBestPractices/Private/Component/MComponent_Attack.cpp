@@ -3,13 +3,15 @@
 
 #include "Component/MComponent_Attack.h"
 
+#include "Net/UnrealNetwork.h"
+
 // Sets default values for this component's properties
 UMComponent_Attack::UMComponent_Attack()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-
+	SetIsReplicatedByDefault(true);
 	// ...
 }
 
@@ -86,6 +88,13 @@ void UMComponent_Attack::PlayMontage_Attack()
 void UMComponent_Attack::EndAttack()
 {
 	Set_bIsAttacking(false);
+}
+
+void UMComponent_Attack::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	
+	DOREPLIFETIME(UMComponent_Attack, bIsAttacking);
 }
 
 void UMComponent_Attack::Set_bIsAttacking(bool bNewValue)

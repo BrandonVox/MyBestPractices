@@ -17,6 +17,8 @@ public: // Function
 	UMComponent_Attack();
 	void LocalInputPressed();
 	void EndAttack();
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 
 	// Called every frame
 	// virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -27,13 +29,13 @@ protected: // Function
 
 private: // Function
 	void TryAttack();
-	
+
 	UFUNCTION(Server, Reliable)
 	void Server_TryAttack();
-	
+
 	UFUNCTION(NetMulticast, Reliable)
 	void NetMulticast_PlayAttack();
-	
+
 	void PlayMontage_Attack();
 	void Set_bIsAttacking(bool bNewValue);
 	void OnSet_bIsAttacking();
@@ -41,6 +43,7 @@ private: // Function
 private: // Property
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings")
 	TObjectPtr<UAnimMontage> Montage_Attack;
-	
+
+	UPROPERTY(Replicated)
 	bool bIsAttacking = false;
 };
