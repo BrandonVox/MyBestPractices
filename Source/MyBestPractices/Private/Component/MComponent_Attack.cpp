@@ -41,7 +41,7 @@ void UMComponent_Attack::LocalInputPressed()
 	{
 		if (!bIsAttacking)
 		{
-			NetMulticast_PlayAttack();
+			Set_bIsAttacking(true);
 		}
 	}
 	else // Not Server - Clients
@@ -63,16 +63,8 @@ void UMComponent_Attack::Server_TryAttack_Implementation()
 	// Server
 	if (!bIsAttacking)
 	{
-		NetMulticast_PlayAttack();
+		Set_bIsAttacking(true);
 	}
-}
-
-void UMComponent_Attack::NetMulticast_PlayAttack_Implementation()
-{
-	UE_LOG(LogTemp, Warning, TEXT("NetMulticast_PlayAttack"));
-	// all machines
-	// server and clients
-	Set_bIsAttacking(true);
 }
 
 void UMComponent_Attack::PlayMontage_Attack()
@@ -93,14 +85,17 @@ void UMComponent_Attack::EndAttack()
 void UMComponent_Attack::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-	
+
 	DOREPLIFETIME(UMComponent_Attack, bIsAttacking);
 }
 
 void UMComponent_Attack::Set_bIsAttacking(bool bNewValue)
 {
-	bIsAttacking = bNewValue;
-	OnSet_bIsAttacking();
+	if (GetOwnerRole() == ROLE_Authority)
+	{
+		bIsAttacking = bNewValue;
+		OnSet_bIsAttacking();
+	}
 }
 
 void UMComponent_Attack::OnSet_bIsAttacking()
@@ -113,4 +108,9 @@ void UMComponent_Attack::OnSet_bIsAttacking()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("bIsAttacking = false"));
 	}
+}
+
+void UMComponent_Attack::OnRep_bIsAttacking()
+{
+	OnSet_bIsAttacking();
 }

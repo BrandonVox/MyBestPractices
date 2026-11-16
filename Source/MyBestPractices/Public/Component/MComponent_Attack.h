@@ -33,17 +33,17 @@ private: // Function
 	UFUNCTION(Server, Reliable)
 	void Server_TryAttack();
 
-	UFUNCTION(NetMulticast, Reliable)
-	void NetMulticast_PlayAttack();
-
 	void PlayMontage_Attack();
 	void Set_bIsAttacking(bool bNewValue);
 	void OnSet_bIsAttacking();
+	
+	UFUNCTION()
+	void OnRep_bIsAttacking();
 
 private: // Property
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings")
 	TObjectPtr<UAnimMontage> Montage_Attack;
 
-	UPROPERTY(Replicated)
+	UPROPERTY(ReplicatedUsing = OnRep_bIsAttacking)
 	bool bIsAttacking = false;
 };
