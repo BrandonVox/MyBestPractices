@@ -11,6 +11,7 @@ AMCharacter::AMCharacter()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	bReplicates = true;
+	SetMinNetUpdateFrequency(10.f);
 	SetNetUpdateFrequency(100.f);
 	/*
 	 * Net Update Frequency controls how often an actor is considered for replication, measured in updates per second
