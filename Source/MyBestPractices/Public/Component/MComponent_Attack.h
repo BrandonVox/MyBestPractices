@@ -38,7 +38,7 @@ private: // Function
 	void OnSet_bIsAttacking();
 	
 	UFUNCTION()
-	void OnRep_bIsAttacking();
+	void OnRep_bIsAttacking(bool bOldValue);
 
 private: // Property
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings")

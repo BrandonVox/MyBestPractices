@@ -19,15 +19,13 @@ void UMComponent_Attack::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	DOREPLIFETIME(UMComponent_Attack, bIsAttacking);
+	DOREPLIFETIME_CONDITION_NOTIFY(UMComponent_Attack, bIsAttacking, COND_None, REPNOTIFY_OnChanged);
 }
 
 // Called when the game starts
 void UMComponent_Attack::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// ...
 }
 
 
@@ -110,7 +108,15 @@ void UMComponent_Attack::OnSet_bIsAttacking()
 	}
 }
 
-void UMComponent_Attack::OnRep_bIsAttacking()
+void UMComponent_Attack::OnRep_bIsAttacking(bool bOldValue)
 {
+	if (bIsAttacking == bOldValue)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Same Value"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Different Value"));
+	}
 	OnSet_bIsAttacking();
 }
