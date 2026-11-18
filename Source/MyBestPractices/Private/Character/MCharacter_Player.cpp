@@ -129,7 +129,7 @@ void AMCharacter_Player::HandleIA_Move_Triggered(const FInputActionValue& InputA
 {
 	FVector2D AxisValue = InputActionValue.Get<FVector2D>().GetClampedToMaxSize(1.f);
 
-	UE_LOG(LogTemp, Warning, TEXT("Moment Input Length = %f"), AxisValue.Length());
+	// UE_LOG(LogTemp, Warning, TEXT("Moment Input Length = %f"), AxisValue.Length());
 
 
 	// Unit vector for directional

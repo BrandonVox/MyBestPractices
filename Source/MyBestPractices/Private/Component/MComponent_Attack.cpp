@@ -15,6 +15,13 @@ UMComponent_Attack::UMComponent_Attack()
 	// ...
 }
 
+void UMComponent_Attack::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(UMComponent_Attack, bIsAttacking);
+}
+
 // Called when the game starts
 void UMComponent_Attack::BeginPlay()
 {
@@ -34,7 +41,7 @@ void UMComponent_Attack::BeginPlay()
 
 void UMComponent_Attack::LocalInputPressed()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Attack Pressed"));
+	// UE_LOG(LogTemp, Warning, TEXT("Attack Pressed"));
 
 
 	if (GetOwner()->HasAuthority()) // server
@@ -82,13 +89,6 @@ void UMComponent_Attack::EndAttack()
 	Set_bIsAttacking(false);
 }
 
-void UMComponent_Attack::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	DOREPLIFETIME(UMComponent_Attack, bIsAttacking);
-}
-
 void UMComponent_Attack::Set_bIsAttacking(bool bNewValue)
 {
 	if (GetOwnerRole() == ROLE_Authority)
@@ -106,7 +106,7 @@ void UMComponent_Attack::OnSet_bIsAttacking()
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("bIsAttacking = false"));
+		// UE_LOG(LogTemp, Warning, TEXT("bIsAttacking = false"));
 	}
 }
 
