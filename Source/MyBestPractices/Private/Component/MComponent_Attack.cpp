@@ -85,6 +85,18 @@ void UMComponent_Attack::PlayMontage_Attack()
 void UMComponent_Attack::EndAttack()
 {
 	Set_bIsAttacking(false);
+
+	float NotifyPosition_EndAttack = GetOwner()
+	                                 ->FindComponentByClass<USkeletalMeshComponent>()
+	                                 ->GetAnimInstance()
+	                                 ->Montage_GetPosition(Montage_Attack);
+	
+	// get position
+	// FAnimMontageInstance*
+	// active
+	// blending out
+	
+	UE_LOG(LogTemp, Warning, TEXT("NotifyPosition_EndAttack = %f"), NotifyPosition_EndAttack);
 }
 
 void UMComponent_Attack::Set_bIsAttacking(bool bNewValue)

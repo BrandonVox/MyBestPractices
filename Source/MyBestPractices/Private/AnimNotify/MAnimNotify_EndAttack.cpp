@@ -5,6 +5,11 @@
 
 #include "Component/MComponent_Attack.h"
 
+UMAnimNotify_EndAttack::UMAnimNotify_EndAttack()
+{
+	bIsNativeBranchingPoint = true;
+}
+
 void UMAnimNotify_EndAttack::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
                                     const FAnimNotifyEventReference& EventReference)
 {
