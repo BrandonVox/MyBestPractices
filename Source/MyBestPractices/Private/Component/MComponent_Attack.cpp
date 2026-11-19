@@ -110,13 +110,5 @@ void UMComponent_Attack::OnSet_bIsAttacking()
 
 void UMComponent_Attack::OnRep_bIsAttacking(bool bOldValue)
 {
-	if (bIsAttacking == bOldValue)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Same Value"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Different Value"));
-	}
 	OnSet_bIsAttacking();
 }
