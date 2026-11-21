@@ -125,5 +125,12 @@ void UMComponent_Attack::HandleAnyMontageBlendingOut(UAnimMontage* InMontage, bo
 	if (InMontage == Montage_Attack)
 	{
 		EndAttack();
+		// remove callback from delegate
+		USkeletalMeshComponent* Comp_Mesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
+		if (Comp_Mesh != nullptr)
+		{
+			UAnimInstance* AnimInstance_My = Comp_Mesh->GetAnimInstance();
+			AnimInstance_My->OnMontageBlendingOut.RemoveDynamic(this, &UMComponent_Attack::HandleAnyMontageBlendingOut);
+		}
 	}
 }
