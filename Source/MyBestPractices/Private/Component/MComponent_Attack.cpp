@@ -74,29 +74,22 @@ void UMComponent_Attack::Server_TryAttack_Implementation()
 
 void UMComponent_Attack::PlayMontage_Attack()
 {
+	UE_LOG(LogTemp, Warning, TEXT("PlayMontage_Attack"));
+
 	USkeletalMeshComponent* Comp_Mesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
 	if (Comp_Mesh != nullptr)
 	{
 		UAnimInstance* AnimInstance_My = Comp_Mesh->GetAnimInstance();
 		AnimInstance_My->Montage_Play(Montage_Attack);
+
+
+		AnimInstance_My->OnMontageBlendingOut.AddUniqueDynamic(this, &UMComponent_Attack::HandleAnyMontageBlendingOut);
 	}
 }
 
 void UMComponent_Attack::EndAttack()
 {
 	Set_bIsAttacking(false);
-
-	float NotifyPosition_EndAttack = GetOwner()
-	                                 ->FindComponentByClass<USkeletalMeshComponent>()
-	                                 ->GetAnimInstance()
-	                                 ->Montage_GetPosition(Montage_Attack);
-	
-	// get position
-	// FAnimMontageInstance*
-	// active
-	// blending out
-	
-	UE_LOG(LogTemp, Warning, TEXT("NotifyPosition_EndAttack = %f"), NotifyPosition_EndAttack);
 }
 
 void UMComponent_Attack::Set_bIsAttacking(bool bNewValue)
@@ -123,4 +116,14 @@ void UMComponent_Attack::OnSet_bIsAttacking()
 void UMComponent_Attack::OnRep_bIsAttacking(bool bOldValue)
 {
 	OnSet_bIsAttacking();
+}
+
+void UMComponent_Attack::HandleAnyMontageBlendingOut(UAnimMontage* InMontage, bool bInterrupted)
+{
+	UE_LOG(LogTemp, Warning, TEXT("HandleAnyMontageBlendingOut"));
+
+	if (InMontage == Montage_Attack)
+	{
+		EndAttack();
+	}
 }

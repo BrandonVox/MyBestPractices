@@ -39,6 +39,10 @@ private: // Function
 	
 	UFUNCTION()
 	void OnRep_bIsAttacking(bool bOldValue);
+	
+	
+	UFUNCTION()
+	void HandleAnyMontageBlendingOut(UAnimMontage* InMontage, bool bInterrupted);
 
 private: // Property
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings")
