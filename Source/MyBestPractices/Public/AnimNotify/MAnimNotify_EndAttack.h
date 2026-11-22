@@ -14,11 +14,11 @@ class MYBESTPRACTICES_API UMAnimNotify_EndAttack : public UAnimNotify
 {
 	GENERATED_BODY()
 
-	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
-	                    const FAnimNotifyEventReference& EventReference) override;
-
-	virtual FString GetNotifyName_Implementation() const override;
-	
 public:
 	UMAnimNotify_EndAttack();
+	
+	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
+					const FAnimNotifyEventReference& EventReference) override;
+
+	virtual FString GetNotifyName_Implementation() const override;
 };

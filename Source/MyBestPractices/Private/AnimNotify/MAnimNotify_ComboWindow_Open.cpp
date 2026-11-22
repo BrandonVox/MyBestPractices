@@ -11,7 +11,7 @@ void UMAnimNotify_ComboWindow_Open::Notify(USkeletalMeshComponent* MeshComp, UAn
 
 FString UMAnimNotify_ComboWindow_Open::GetNotifyName_Implementation() const
 {
-	return FString(TEXT("OpenCombo"));
+	return Name_NextSection.ToString();
 }
 
 UMAnimNotify_ComboWindow_Open::UMAnimNotify_ComboWindow_Open()

@@ -13,12 +13,16 @@ UCLASS()
 class MYBESTPRACTICES_API UMAnimNotify_ComboWindow_Open : public UAnimNotify
 {
 	GENERATED_BODY()
-	
-	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
-					const FAnimNotifyEventReference& EventReference) override;
 
-	virtual FString GetNotifyName_Implementation() const override;
-	
 public:
 	UMAnimNotify_ComboWindow_Open();
+
+	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
+	                    const FAnimNotifyEventReference& EventReference) override;
+
+	virtual FString GetNotifyName_Implementation() const override;
+
+private:
+	UPROPERTY(EditInstanceOnly, Category = "MBP Settings")
+	FName Name_NextSection;
 };
