@@ -24,5 +24,5 @@ public:
 
 private:
 	UPROPERTY(EditInstanceOnly, Category = "MBP Settings")
-	FName Name_NextSection;
+	FName Name_NextSection = NAME_None;
 };

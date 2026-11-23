@@ -87,9 +87,15 @@ void UMComponent_Attack::PlayMontage_Attack()
 	}
 }
 
-void UMComponent_Attack::HandleComboWindow_Open()
+void UMComponent_Attack::HandleComboWindow_Open(FName Name_Section_Next)
 {
 	UE_LOG(LogTemp, Warning, TEXT("HandleComboWindow_Open"));
+
+	UAnimInstance* AnimInstance_Owner = GetAnimInstanceFromOwner();
+	FName Name_Section_Current = AnimInstance_Owner->Montage_GetCurrentSection(Montage_Attack);
+
+	AnimInstance_Owner
+		->Montage_SetNextSection(Name_Section_Current, Name_Section_Next, Montage_Attack);
 }
 
 void UMComponent_Attack::EndAttack()
@@ -138,4 +144,9 @@ void UMComponent_Attack::HandleAnyMontageBlendingOut(UAnimMontage* InMontage, bo
 			AnimInstance_My->OnMontageBlendingOut.RemoveDynamic(this, &UMComponent_Attack::HandleAnyMontageBlendingOut);
 		}
 	}
+}
+
+UAnimInstance* UMComponent_Attack::GetAnimInstanceFromOwner() const
+{
+	return GetOwner()->FindComponentByClass<USkeletalMeshComponent>()->GetAnimInstance();
 }

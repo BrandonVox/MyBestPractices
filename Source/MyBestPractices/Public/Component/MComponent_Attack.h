@@ -16,7 +16,7 @@ public: // Function
 	// Sets default values for this component's properties
 	UMComponent_Attack();
 	void LocalInputPressed();
-	void HandleComboWindow_Open();
+	void HandleComboWindow_Open(FName Name_Section_Next);
 	void EndAttack();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
@@ -44,6 +44,9 @@ private: // Function
 	
 	UFUNCTION()
 	void HandleAnyMontageBlendingOut(UAnimMontage* InMontage, bool bInterrupted);
+	
+	
+	UAnimInstance* GetAnimInstanceFromOwner() const;
 
 private: // Property
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings")

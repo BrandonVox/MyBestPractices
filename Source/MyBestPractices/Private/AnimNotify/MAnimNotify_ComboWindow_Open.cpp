@@ -13,7 +13,7 @@ void UMAnimNotify_ComboWindow_Open::Notify(USkeletalMeshComponent* MeshComp, UAn
 	UMComponent_Attack* Comp_Attack = MeshComp->GetOwner()->FindComponentByClass<UMComponent_Attack>();
 	if (Comp_Attack != nullptr)
 	{
-		Comp_Attack->HandleComboWindow_Open();
+		Comp_Attack->HandleComboWindow_Open(Name_NextSection);
 	}
 }
 
