@@ -87,6 +87,11 @@ void UMComponent_Attack::PlayMontage_Attack()
 	}
 }
 
+void UMComponent_Attack::HandleComboWindow_Open()
+{
+	UE_LOG(LogTemp, Warning, TEXT("HandleComboWindow_Open"));
+}
+
 void UMComponent_Attack::EndAttack()
 {
 	Set_bIsAttacking(false);

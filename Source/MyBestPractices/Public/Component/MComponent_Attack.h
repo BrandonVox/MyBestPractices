@@ -16,6 +16,7 @@ public: // Function
 	// Sets default values for this component's properties
 	UMComponent_Attack();
 	void LocalInputPressed();
+	void HandleComboWindow_Open();
 	void EndAttack();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
