@@ -17,6 +17,7 @@ public: // Function
 	UMComponent_Attack();
 	void LocalInputPressed();
 	void HandleComboWindow_Open(FName Name_Section_Next);
+	void HandleComboWindow_Close();
 	void EndAttack();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 

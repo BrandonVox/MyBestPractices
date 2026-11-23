@@ -98,6 +98,11 @@ void UMComponent_Attack::HandleComboWindow_Open(FName Name_Section_Next)
 		->Montage_SetNextSection(Name_Section_Current, Name_Section_Next, Montage_Attack);
 }
 
+void UMComponent_Attack::HandleComboWindow_Close()
+{
+	UE_LOG(LogTemp, Warning, TEXT("HandleComboWindow_Close"));
+}
+
 void UMComponent_Attack::EndAttack()
 {
 	Set_bIsAttacking(false);
