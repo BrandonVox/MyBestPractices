@@ -132,6 +132,15 @@ void UMComponent_Attack::OnSet_bIsAttacking()
 void UMComponent_Attack::OnRep_bIsAttacking(bool bOldValue)
 {
 	OnSet_bIsAttacking();
+	// client
+	if (bIsAttacking == false)
+	{
+		UAnimInstance* AnimInstance_Owner = GetAnimInstanceFromOwner();
+		if (AnimInstance_Owner->Montage_IsActive(Montage_Attack))
+		{
+			AnimInstance_Owner->Montage_Stop(Montage_Attack->GetDefaultBlendOutTime(), Montage_Attack);
+		}
+	}
 }
 
 void UMComponent_Attack::HandleAnyMontageBlendingOut(UAnimMontage* InMontage, bool bInterrupted)
