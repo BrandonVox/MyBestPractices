@@ -26,6 +26,9 @@ void UMComponent_Attack::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 void UMComponent_Attack::BeginPlay()
 {
 	Super::BeginPlay();
+
+	GetAnimInstanceFromOwner()
+		->OnMontageBlendingOut.AddDynamic(this, &UMComponent_Attack::HandleAnyMontageBlendingOut);
 }
 
 
@@ -81,9 +84,6 @@ void UMComponent_Attack::PlayMontage_Attack()
 	{
 		UAnimInstance* AnimInstance_My = Comp_Mesh->GetAnimInstance();
 		AnimInstance_My->Montage_Play(Montage_Attack);
-
-
-		AnimInstance_My->OnMontageBlendingOut.AddUniqueDynamic(this, &UMComponent_Attack::HandleAnyMontageBlendingOut);
 	}
 }
 
@@ -136,19 +136,15 @@ void UMComponent_Attack::OnRep_bIsAttacking(bool bOldValue)
 
 void UMComponent_Attack::HandleAnyMontageBlendingOut(UAnimMontage* InMontage, bool bInterrupted)
 {
-	UE_LOG(LogTemp, Warning, TEXT("HandleAnyMontageBlendingOut"));
-
-	if (InMontage == Montage_Attack)
+	if (InMontage != Montage_Attack)
 	{
-		EndAttack();
-		// remove callback from delegate
-		USkeletalMeshComponent* Comp_Mesh = GetOwner()->FindComponentByClass<USkeletalMeshComponent>();
-		if (Comp_Mesh != nullptr)
-		{
-			UAnimInstance* AnimInstance_My = Comp_Mesh->GetAnimInstance();
-			AnimInstance_My->OnMontageBlendingOut.RemoveDynamic(this, &UMComponent_Attack::HandleAnyMontageBlendingOut);
-		}
+		return;
 	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Handle Attacking Montage Blending Out"));
+
+
+	EndAttack();
 }
 
 UAnimInstance* UMComponent_Attack::GetAnimInstanceFromOwner() const
