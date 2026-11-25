@@ -3,6 +3,8 @@
 
 #include "Component/MComponent_Attack.h"
 
+#include "Components/AudioComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 
 // Sets default values for this component's properties
@@ -90,6 +92,8 @@ void UMComponent_Attack::PlayMontage_Attack()
 void UMComponent_Attack::HandleComboWindow_Open(FName Name_Section_Next)
 {
 	UE_LOG(LogTemp, Warning, TEXT("HandleComboWindow_Open"));
+	// spawn sound 2d
+	Component_Audio_ComboWindow = UGameplayStatics::SpawnSound2D(this, Sound_ComboWindow);
 
 	UAnimInstance* AnimInstance_Owner = GetAnimInstanceFromOwner();
 	FName Name_Section_Current = AnimInstance_Owner->Montage_GetCurrentSection(Montage_Attack);
@@ -101,6 +105,10 @@ void UMComponent_Attack::HandleComboWindow_Open(FName Name_Section_Next)
 void UMComponent_Attack::HandleComboWindow_Close()
 {
 	UE_LOG(LogTemp, Warning, TEXT("HandleComboWindow_Close"));
+	if (Component_Audio_ComboWindow != nullptr)
+	{
+		Component_Audio_ComboWindow->Stop();
+	}
 }
 
 void UMComponent_Attack::EndAttack()

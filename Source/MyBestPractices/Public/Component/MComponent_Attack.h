@@ -38,15 +38,15 @@ private: // Function
 	void PlayMontage_Attack();
 	void Set_bIsAttacking(bool bNewValue);
 	void OnSet_bIsAttacking();
-	
+
 	UFUNCTION()
 	void OnRep_bIsAttacking(bool bOldValue);
-	
-	
+
+
 	UFUNCTION()
 	void HandleAnyMontageBlendingOut(UAnimMontage* InMontage, bool bInterrupted);
-	
-	
+
+
 	UAnimInstance* GetAnimInstanceFromOwner() const;
 
 private: // Property
@@ -55,4 +55,10 @@ private: // Property
 
 	UPROPERTY(ReplicatedUsing = OnRep_bIsAttacking)
 	bool bIsAttacking = false;
+
+	UPROPERTY()
+	TObjectPtr<UAudioComponent> Component_Audio_ComboWindow;
+
+	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings | Debug")
+	TObjectPtr<USoundBase> Sound_ComboWindow;
 };
