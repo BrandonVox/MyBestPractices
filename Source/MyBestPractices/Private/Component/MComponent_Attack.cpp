@@ -89,17 +89,12 @@ void UMComponent_Attack::PlayMontage_Attack()
 	}
 }
 
-void UMComponent_Attack::HandleComboWindow_Open(FName Name_Section_Next)
+void UMComponent_Attack::HandleComboWindow_Open(FName InName_Section_Next)
 {
 	UE_LOG(LogTemp, Warning, TEXT("HandleComboWindow_Open"));
-	// spawn sound 2d
 	Component_Audio_ComboWindow = UGameplayStatics::SpawnSound2D(this, Sound_ComboWindow);
-
-	UAnimInstance* AnimInstance_Owner = GetAnimInstanceFromOwner();
-	FName Name_Section_Current = AnimInstance_Owner->Montage_GetCurrentSection(Montage_Attack);
-
-	AnimInstance_Owner
-		->Montage_SetNextSection(Name_Section_Current, Name_Section_Next, Montage_Attack);
+	
+	Name_Section_Next = InName_Section_Next;
 }
 
 void UMComponent_Attack::HandleComboWindow_Close()
@@ -109,10 +104,22 @@ void UMComponent_Attack::HandleComboWindow_Close()
 	{
 		Component_Audio_ComboWindow->Stop();
 	}
+	
+	Name_Section_Next = NAME_None;
 }
 
-void UMComponent_Attack::EndAttack()
+void UMComponent_Attack::SetupNextSection()
 {
+	UAnimInstance* AnimInstance_Owner = GetAnimInstanceFromOwner();
+	FName Name_Section_Current = AnimInstance_Owner->Montage_GetCurrentSection(Montage_Attack);
+
+	AnimInstance_Owner
+		->Montage_SetNextSection(Name_Section_Current, Name_Section_Next, Montage_Attack);
+}
+
+void UMComponent_Attack::ResetAttack()
+{
+	Name_Section_Next = NAME_None;
 	Set_bIsAttacking(false);
 }
 
@@ -161,10 +168,12 @@ void UMComponent_Attack::HandleAnyMontageBlendingOut(UAnimMontage* InMontage, bo
 	UE_LOG(LogTemp, Warning, TEXT("Handle Attacking Montage Blending Out"));
 
 
-	EndAttack();
+	ResetAttack();
 }
 
 UAnimInstance* UMComponent_Attack::GetAnimInstanceFromOwner() const
 {
 	return GetOwner()->FindComponentByClass<USkeletalMeshComponent>()->GetAnimInstance();
 }
+
+

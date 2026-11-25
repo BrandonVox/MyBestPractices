@@ -16,9 +16,9 @@ public: // Function
 	// Sets default values for this component's properties
 	UMComponent_Attack();
 	void LocalInputPressed();
-	void HandleComboWindow_Open(FName Name_Section_Next);
+	void HandleComboWindow_Open(FName InName_Section_Next);
 	void HandleComboWindow_Close();
-	void EndAttack();
+	void ResetAttack();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 
@@ -48,6 +48,8 @@ private: // Function
 
 
 	UAnimInstance* GetAnimInstanceFromOwner() const;
+	
+	void SetupNextSection();
 
 private: // Property
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings")
@@ -61,4 +63,6 @@ private: // Property
 
 	UPROPERTY(EditDefaultsOnly, Category = "MBP Settings | Debug")
 	TObjectPtr<USoundBase> Sound_ComboWindow;
+	
+	FName Name_Section_Next = NAME_None;
 };

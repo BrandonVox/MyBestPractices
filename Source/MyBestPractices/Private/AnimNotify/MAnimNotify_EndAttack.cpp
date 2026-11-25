@@ -22,7 +22,7 @@ void UMAnimNotify_EndAttack::Notify(USkeletalMeshComponent* MeshComp, UAnimSeque
 	UMComponent_Attack* Component_Attack = Actor_Owner->FindComponentByClass<UMComponent_Attack>();
 	if (Component_Attack != nullptr)
 	{
-		Component_Attack->EndAttack();
+		Component_Attack->ResetAttack();
 	}
 }
 
