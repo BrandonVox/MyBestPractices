@@ -44,20 +44,7 @@ void UMComponent_Attack::BeginPlay()
 
 void UMComponent_Attack::LocalInputPressed()
 {
-	// UE_LOG(LogTemp, Warning, TEXT("Attack Pressed"));
-
-
-	if (GetOwner()->HasAuthority()) // server
-	{
-		if (!bIsAttacking)
-		{
-			Set_bIsAttacking(true);
-		}
-	}
-	else // Not Server - Clients
-	{
-		Server_TryAttack();
-	}
+	Server_TryAttack();
 }
 
 void UMComponent_Attack::TryAttack()
@@ -93,7 +80,7 @@ void UMComponent_Attack::HandleComboWindow_Open(FName InName_Section_Next)
 {
 	UE_LOG(LogTemp, Warning, TEXT("HandleComboWindow_Open"));
 	Component_Audio_ComboWindow = UGameplayStatics::SpawnSound2D(this, Sound_ComboWindow);
-	
+
 	Name_Section_Next = InName_Section_Next;
 }
 
@@ -104,7 +91,7 @@ void UMComponent_Attack::HandleComboWindow_Close()
 	{
 		Component_Audio_ComboWindow->Stop();
 	}
-	
+
 	Name_Section_Next = NAME_None;
 }
 
@@ -175,5 +162,3 @@ UAnimInstance* UMComponent_Attack::GetAnimInstanceFromOwner() const
 {
 	return GetOwner()->FindComponentByClass<USkeletalMeshComponent>()->GetAnimInstance();
 }
-
-
