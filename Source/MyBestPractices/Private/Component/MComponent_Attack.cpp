@@ -91,6 +91,12 @@ void UMComponent_Attack::HandleComboWindow_Open(FName InName_Section_Next)
 	Component_Audio_ComboWindow = UGameplayStatics::SpawnSound2D(this, Sound_ComboWindow);
 
 	Name_Section_Next = InName_Section_Next;
+	
+	// check if client -> then advanced
+	if (GetOwnerRole() != ROLE_Authority) // not server/standalone
+	{
+		SetupNextSection();
+	}
 }
 
 void UMComponent_Attack::HandleComboWindow_Close()
