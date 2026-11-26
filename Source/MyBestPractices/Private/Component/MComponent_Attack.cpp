@@ -58,9 +58,18 @@ void UMComponent_Attack::TryAttack()
 void UMComponent_Attack::Server_TryAttack_Implementation()
 {
 	// Server
-	if (!bIsAttacking)
+	if (!bIsAttacking) // is not attacking
 	{
 		Set_bIsAttacking(true);
+	}
+	else // is attacking, check if combo window is open to set next section
+	{
+		if (Name_Section_Next != NAME_None)
+		{
+			SetupNextSection();
+			UE_LOG(LogTemp, Warning, TEXT("Consume Combo Input"));
+			Name_Section_Next = NAME_None;
+		}
 	}
 }
 
